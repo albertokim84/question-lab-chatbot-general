@@ -10,7 +10,7 @@ import os
 
 # 에러 방지를 위해 예외 처리
 try:
-    MY_API_KEY = st.secrets["AIzaSyA4GVhXMBBvxHx8u4tJW9qdbSoPnoXMYdc"]
+    MY_API_KEY = st.secrets["MY_API_KEY"]
 except FileNotFoundError:
     # 로컬(내 컴퓨터)에서 테스트할 때를 위한 임시 방편 (배포 시엔 이 줄이 무시됨)
     MY_API_KEY = "AIzaSyA4GVhXMBBvxHx8u4tJW9qdbSoPnoXMYdc"
