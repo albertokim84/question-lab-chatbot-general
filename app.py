@@ -94,7 +94,7 @@ system_instruction = """
 # 'gemini-1.5-flash' 대신 가장 안정적인 'gemini-pro'를 사용합니다.
 try:
     model = genai.GenerativeModel(
-        model_name="gemini-2.5-flash", 
+        model_name="gemini-2.0-flash", 
         system_instruction=system_instruction
     )
 except Exception as e:
