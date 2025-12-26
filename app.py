@@ -13,7 +13,7 @@ try:
     MY_API_KEY = st.secrets["MY_API_KEY"]
 except FileNotFoundError:
     # 로컬(내 컴퓨터)에서 테스트할 때를 위한 임시 방편 (배포 시엔 이 줄이 무시됨)
-    MY_API_KEY = "AIzaSyA4GVhXMBBvxHx8u4tJW9qdbSoPnoXMYdc"
+    MY_API_KEY = "AIzaSyDRJ1VtTS81pUJ3RwhZnXj_qu0RkbTz2H8"
 
 st.set_page_config(
     page_title="질문 디자인 랩",
