@@ -1,6 +1,5 @@
 import streamlit as st
 import google.generativeai as genai
-import streamlit.components.v1 as components  # 자동 스크롤 다운
 
 # ==========================================
 # 1. 설정 (API 키 입력)
@@ -324,19 +323,6 @@ if prompt := st.chat_input("질문을 입력해보세요 (예: 인공지능은 �
                 full_response += chunk.text
                 message_placeholder.markdown(full_response + "▌")
             message_placeholder.markdown(full_response)
-            # [수정된 코드] 1. 눈에 안 보이는 '깃발'을 맨 아래에 꽂습니다.
-            st.markdown('<div id="scroll-to-here"></div>', unsafe_allow_html=True)
-
-            # [수정된 코드] 2. 자바스크립트로 "깃발 위치로 이동해!"라고 명령합니다.
-            js_code = """
-            <script>
-                var target = window.parent.document.getElementById("scroll-to-here");
-                if (target) {
-                    target.scrollIntoView({behavior: "smooth", block: "end"});
-                }
-            </script>
-            """
-            components.html(js_code, height=0)
 
         except Exception as e:
             # [추가할 핵심 코드] 에러가 났을 때, 망가진 이번 대화 턴을 기록에서 삭제합니다.
