@@ -324,20 +324,16 @@ if prompt := st.chat_input("질문을 입력해보세요 (예: 인공지능은 �
                 full_response += chunk.text
                 message_placeholder.markdown(full_response + "▌")
             message_placeholder.markdown(full_response)
+            # [수정된 코드] 1. 눈에 안 보이는 '깃발'을 맨 아래에 꽂습니다.
+            st.markdown('<div id="scroll-to-here"></div>', unsafe_allow_html=True)
+
+            # [수정된 코드] 2. 자바스크립트로 "깃발 위치로 이동해!"라고 명령합니다.
             js_code = """
             <script>
-                function scrollBottom() {
-                    var section = window.parent.document.querySelector('[data-testid="stAppViewContainer"]');
-                    if (section) {
-                        section.scrollTop = section.scrollHeight;
-                    }
+                var target = window.parent.document.getElementById("scroll-to-here");
+                if (target) {
+                    target.scrollIntoView({behavior: "smooth", block: "end"});
                 }
-                // 1. 즉시 실행
-                scrollBottom();
-                // 2. 0.1초 뒤에 다시 실행 (화면이 다 그려질 시간 확보)
-                setTimeout(scrollBottom, 100);
-                // 3. 0.3초 뒤에 확인 사살
-                setTimeout(scrollBottom, 300);
             </script>
             """
             components.html(js_code, height=0)
