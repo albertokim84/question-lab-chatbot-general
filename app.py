@@ -1,5 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
+import streamlit.components.v1 as components  # 자동 스크롤 다운
 
 # ==========================================
 # 1. 설정 (API 키 입력)
@@ -323,9 +324,19 @@ if prompt := st.chat_input("질문을 입력해보세요 (예: 인공지능은 �
                 full_response += chunk.text
                 message_placeholder.markdown(full_response + "▌")
             message_placeholder.markdown(full_response)
+            js_code = """
+            <script>
+            var body = window.parent.document.querySelector(".main");
+            body.scrollTop = body.scrollHeight;
+            </script>
+            """
+            components.html(js_code, height=0)
+
         except Exception as e:
             # [추가할 핵심 코드] 에러가 났을 때, 망가진 이번 대화 턴을 기록에서 삭제합니다.
             st.session_state.chat_session.rewind()
             
             # 에러 메시지 출력
             st.error(f"오류가 발생했습니다: {e}")
+
+            
