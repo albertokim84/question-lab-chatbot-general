@@ -326,16 +326,18 @@ if prompt := st.chat_input("질문을 입력해보세요 (예: 인공지능은 �
             message_placeholder.markdown(full_response)
             js_code = """
             <script>
-                // Streamlit의 최신 '스크롤 통' 이름표를 찾습니다
-                var section = window.parent.document.querySelector('[data-testid="stAppViewContainer"]');
-                // 만약 못 찾으면 옛날 이름표로 다시 찾습니다 (보험용)
-                if (!section) {
-                    section = window.parent.document.querySelector('section.main');
+                function scrollBottom() {
+                    var section = window.parent.document.querySelector('[data-testid="stAppViewContainer"]');
+                    if (section) {
+                        section.scrollTop = section.scrollHeight;
+                    }
                 }
-                // 찾았으면 맨 아래로 슉! 내립니다
-                if (section) {
-                    section.scrollTop = section.scrollHeight;
-                }
+                // 1. 즉시 실행
+                scrollBottom();
+                // 2. 0.1초 뒤에 다시 실행 (화면이 다 그려질 시간 확보)
+                setTimeout(scrollBottom, 100);
+                // 3. 0.3초 뒤에 확인 사살
+                setTimeout(scrollBottom, 300);
             </script>
             """
             components.html(js_code, height=0)
